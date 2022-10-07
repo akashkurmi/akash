@@ -20,43 +20,49 @@ var _Name = require('../components/Name');
 
 var _Name2 = _interopRequireDefault(_Name);
 
+var _material = require('@mui/material');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/data/projects/next-apollo/client/pages/index.js?entry';
+var _jsxFileName = '/Users/kash/Documents/assignment/next-apollo-demo/client/pages/index.js?entry';
 
 
 var Page = function Page() {
   return _react2.default.createElement('div', {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
-    }
-  }, 'Welcome, ', _react2.default.createElement(_Name2.default, {
-    __source: {
-      fileName: _jsxFileName,
       lineNumber: 7
     }
-  }), _react2.default.createElement('br', {
-    __source: {
+  }, _react2.default.createElement(_material.Container, { maxWidth: 'md', style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh'
+    }, __source: {
       fileName: _jsxFileName,
       lineNumber: 8
     }
-  }), _react2.default.createElement('br', {
+  }, _react2.default.createElement('h1', {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 14
     }
-  }), _react2.default.createElement(_link2.default, { href: '/about', __source: {
+  }), 'Welcome to,', _react2.default.createElement('h1', {
+    __source: {
       fileName: _jsxFileName,
-      lineNumber: 9
+      lineNumber: 19
+    }
+  }, _react2.default.createElement(_link2.default, { href: '/userslist', __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
     }
   }, _react2.default.createElement('a', {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9
+      lineNumber: 19
     }
-  }, 'About')));
+  }, 'Users List')))));
 };
 
-exports.default = (0, _withApollo2.default)(Page);
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4LmpzIl0sIm5hbWVzIjpbIkxpbmsiLCJXaXRoQXBvbGxvIiwiTmFtZSIsIlBhZ2UiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxBQUFPOzs7O0FBQ1AsQUFBTyxBQUFnQjs7OztBQUN2QixBQUFPLEFBQVU7Ozs7Ozs7OztBQUVqQixJQUFNLE9BQU8sU0FBUCxBQUFPLE9BQUE7eUJBQ1gsY0FBQTs7Z0JBQUE7a0JBQUE7QUFBQTtBQUFBLEdBQUEsRUFDVyw2QkFBQSxBQUFDOztnQkFBRDtrQkFEWCxBQUNXLEFBQ1Q7QUFEUztBQUFBOztnQkFDVDtrQkFGRixBQUVFLEFBQUs7QUFBTDtBQUFBOztnQkFBSztrQkFGUCxBQUVPLEFBQ0w7QUFESztBQUFBLHNCQUNMLEFBQUMsZ0NBQUssTUFBTixBQUFXO2dCQUFYO2tCQUFBLEFBQW9CO0FBQXBCO3FCQUFvQixjQUFBOztnQkFBQTtrQkFBQTtBQUFBO0FBQUEsS0FKWCxBQUNYLEFBR0UsQUFBb0I7QUFKeEIsQUFTQTs7a0JBQWUsMEJBQWYsQUFBZSxBQUFXIiwiZmlsZSI6ImluZGV4LmpzP2VudHJ5Iiwic291cmNlUm9vdCI6Ii9kYXRhL3Byb2plY3RzL25leHQtYXBvbGxvL2NsaWVudCJ9
+exports.default = Page;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4LmpzIl0sIm5hbWVzIjpbIkxpbmsiLCJXaXRoQXBvbGxvIiwiTmFtZSIsIkNvbnRhaW5lciIsIlBhZ2UiLCJkaXNwbGF5IiwiYWxpZ25JdGVtcyIsImp1c3RpZnlDb250ZW50IiwiaGVpZ2h0Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUEsQUFBTzs7OztBQUNQLEFBQU8sQUFBZ0I7Ozs7QUFDdkIsQUFBTyxBQUFVOzs7O0FBQ2pCLEFBQVM7Ozs7Ozs7QUFFVCxJQUFNLE9BQU8sU0FBUCxBQUFPLE9BQUE7eUJBQ1gsY0FBQTs7Z0JBQUE7a0JBQUEsQUFDRTtBQURGO0FBQUEsR0FBQSxrQkFDRSxBQUFDLHFDQUFVLFVBQVgsQUFBb0IsTUFBTTtlQUFPLEFBQ3BCLEFBQ1Q7a0JBRjZCLEFBRWpCLEFBQ1o7c0JBSDZCLEFBR2IsQUFDaEI7Y0FKSixBQUFpQyxBQUlyQjtBQUpxQixBQUM3QjtnQkFESjtrQkFBQSxBQU1KO0FBTkk7OztnQkFNSjtrQkFOSSxBQU1KO0FBQUE7QUFBQSxNQUtJLCtCQUFBLGNBQUE7O2dCQUFBO2tCQUFBLEFBQUk7QUFBSjtBQUFBLHFCQUFJLEFBQUMsZ0NBQUssTUFBTixBQUFXO2dCQUFYO2tCQUFBLEFBQXdCO0FBQXhCO3FCQUF3QixjQUFBOztnQkFBQTtrQkFBQTtBQUFBO0FBQUEsS0FibkIsQUFDWCxBQUNFLEFBV0EsQUFBSSxBQUF3QjtBQWJoQyxBQW1CQTs7a0JBQUEsQUFBZSIsImZpbGUiOiJpbmRleC5qcz9lbnRyeSIsInNvdXJjZVJvb3QiOiIvVXNlcnMva2FzaC9Eb2N1bWVudHMvYXNzaWdubWVudC9uZXh0LWFwb2xsby1kZW1vL2NsaWVudCJ9
