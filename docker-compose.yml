@@ -1,0 +1,10 @@
+version: ''
+services: 
+  node-server:
+      build:
+         context: ./server
+      ports:
+         - "4047:4047"
+      container_name: express 
+      volumes:
+        - .:/server
