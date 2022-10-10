@@ -11,7 +11,7 @@ var casual = require('casual');
 // Define custom generator
 casual.define('user', function() {
     let data=[]
-    for(let i=0;i<2000;i++){
+    for(let i=0;i<20;i++){
         data.push( {
             name: casual.name,
             address: casual.address, 

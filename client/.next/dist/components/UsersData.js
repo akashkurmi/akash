@@ -34,10 +34,13 @@ var _jsxFileName = "/Users/kash/Documents/assignment/next-apollo-demo/client/com
 
 
 function UsersData() {
-    var _useQuery = (0, _client.useQuery)(_query.userList),
-        error = _useQuery.error,
-        loading = _useQuery.loading,
-        data = _useQuery.data;
+    var _useLazyQuery = (0, _client.useLazyQuery)(_query.userList),
+        _useLazyQuery2 = (0, _slicedToArray3.default)(_useLazyQuery, 2),
+        getdata = _useLazyQuery2[0],
+        _useLazyQuery2$ = _useLazyQuery2[1],
+        error = _useLazyQuery2$.error,
+        loading = _useLazyQuery2$.loading,
+        data = _useLazyQuery2$.data;
 
     var _useState = (0, _react.useState)(),
         _useState2 = (0, _slicedToArray3.default)(_useState, 2),
@@ -49,33 +52,55 @@ function UsersData() {
         disData = _useState4[0],
         setDisData = _useState4[1];
 
+    var _useState5 = (0, _react.useState)(false),
+        _useState6 = (0, _slicedToArray3.default)(_useState5, 2),
+        loader = _useState6[0],
+        setloader = _useState6[1];
+
     (0, _react.useEffect)(function () {
-        console.log(data, error);
-        if (data) setStateData(data.User.slice(0, 20));
-    }, [data, error]);
+        getdata().then(function (res) {
+            setStateData(res.data.User);
+        });
+    }, []);
 
     var fetchMoreData = function fetchMoreData() {
-        var start = 20 * disData;
-        var end = 20 * disData + 20;
-        setStateData(stateData.concat(data.User.slice(start, end)));
+        if (disData <= 200) getdata().then(function (res) {
+            setTimeout(function () {
+                setStateData(stateData.concat(res.data.User));
+                setloader(false);
+            }, 1000);
+        });
+
         setDisData(disData + 1);
     };
 
     return _react2.default.createElement("div", {
         __source: {
             fileName: _jsxFileName,
-            lineNumber: 29
+            lineNumber: 33
         }
     }, !stateData ? _react2.default.createElement(_material.LinearProgress, {
         __source: {
             fileName: _jsxFileName,
-            lineNumber: 32
+            lineNumber: 36
         }
     }) : _react2.default.createElement(_reactInfiniteScrollComponent2.default, {
         dataLength: stateData.length
         //   next={fetchMoreData}
         , hasMore: true,
-        loader: _react2.default.createElement("button", { onClick: fetchMoreData,
+        loader: loader ? _react2.default.createElement(_system.Box, { sx: { display: 'flex' }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 44
+            }
+        }, _react2.default.createElement(_material.CircularProgress, { style: { marginLeft: "48%", marginTop: "10px" }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 45
+            }
+        })) : _react2.default.createElement("button", {
+            onClick: function onClick() {
+                setloader(true);
+                fetchMoreData();
+            },
             style: {
                 width: "100px",
                 height: "28px",
@@ -85,20 +110,20 @@ function UsersData() {
                 marginTop: "10px"
             }, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 38
+                lineNumber: 47
             }
         }, "Load More"), __source: {
             fileName: _jsxFileName,
-            lineNumber: 34
+            lineNumber: 38
         }
     }, stateData.map(function (e, i) {
         return _react2.default.createElement(_UserCard2.default, { data: e, index: i, key: i, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 50
+                lineNumber: 62
             }
         });
     })));
 }
 
 exports.default = UsersData;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvVXNlcnNEYXRhLmpzIl0sIm5hbWVzIjpbInVzZUVmZmVjdCIsInVzZVN0YXRlIiwiVXNlckNhcmQiLCJ1c2VRdWVyeSIsInVzZXJMaXN0IiwiQm94IiwiTGluZWFyUHJvZ3Jlc3MiLCJJbmZpbml0ZVNjcm9sbCIsIlVzZXJzRGF0YSIsImVycm9yIiwibG9hZGluZyIsImRhdGEiLCJzdGF0ZURhdGEiLCJzZXRTdGF0ZURhdGEiLCJkaXNEYXRhIiwic2V0RGlzRGF0YSIsImNvbnNvbGUiLCJsb2ciLCJVc2VyIiwic2xpY2UiLCJmZXRjaE1vcmVEYXRhIiwic3RhcnQiLCJlbmQiLCJjb25jYXQiLCJsZW5ndGgiLCJ3aWR0aCIsImhlaWdodCIsImJhY2tncm91bmRDb2xvciIsImNvbG9yIiwibWFyZ2luTGVmdCIsIm1hcmdpblRvcCIsIm1hcCIsImUiLCJpIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUEsQUFBUyxBQUFXOzs7O0FBQ3BCLEFBQU8sQUFBYzs7OztBQUNyQixBQUFROztBQUNSLEFBQVEsQUFBZTs7QUFDdkIsQUFBUzs7QUFDVCxBQUFVOztBQUNWLEFBQU87Ozs7Ozs7OztBQUdQLFNBQUEsQUFBUyxZQUFXO29CQUFBLEFBQ1UsQUFBUztRQURuQixBQUNYLGtCQURXLEFBQ1g7UUFEVyxBQUNMLG9CQURLLEFBQ0w7UUFESyxBQUNHLGlCQURILEFBQ0c7O29CQURILEFBRWdCOzZEQUZoQjtRQUFBLEFBRVQsdUJBRlM7UUFBQSxBQUVFLDBCQUZGOztxQkFHWSxxQkFIWixBQUdZLEFBQVM7OERBSHJCO1FBQUEsQUFHVCxxQkFIUztRQUFBLEFBR0Esd0JBRWhCOzswQkFBVSxZQUFJLEFBQ1Y7Z0JBQUEsQUFBUSxJQUFSLEFBQVksTUFBWixBQUFpQixBQUNqQjtZQUFBLEFBQUcsTUFDSCxhQUFhLEtBQUEsQUFBSyxLQUFMLEFBQVUsTUFBVixBQUFnQixHQUE3QixBQUFhLEFBQWtCLEFBQ2xDO0FBSkQsT0FJRSxDQUFBLEFBQUMsTUFKSCxBQUlFLEFBQU0sQUFFUjs7UUFBTSxnQkFBYyxTQUFkLEFBQWMsZ0JBQUksQUFDcEI7WUFBSSxRQUFNLEtBQVYsQUFBYSxBQUNiO1lBQUksTUFBSSxLQUFBLEFBQUcsVUFBWCxBQUFtQixBQUNuQjtxQkFBYSxVQUFBLEFBQVUsT0FBTyxLQUFBLEFBQUssS0FBTCxBQUFVLE1BQVYsQUFBZ0IsT0FBOUMsQUFBYSxBQUFpQixBQUFzQixBQUNwRDttQkFBVyxVQUFYLEFBQW1CLEFBQ3RCO0FBTEQsQUFPQTs7MkJBQ0ksY0FBQTs7c0JBQUE7d0JBQUEsQUFFSztBQUZMO0FBQUEsS0FBQSxHQUVLLEFBQUMsNEJBQ0YsQUFBQzs7c0JBQUQ7d0JBREMsQUFDRDtBQUFBO0FBQUEsS0FBQSxvQkFFQSxBQUFDO29CQUNTLFVBQVUsQUFDeEI7QUFGSTtBQUNGLFVBRUEsU0FIRSxBQUdPLEFBQ1Q7Z0NBQVEsY0FBQSxZQUFRLFNBQVIsQUFBaUIsQUFDekI7O3VCQUFPLEFBQ0MsQUFDTjt3QkFGSyxBQUVFLEFBQ1A7aUNBSEssQUFHVyxBQUNoQjt1QkFKSyxBQUlDLEFBQ047NEJBTEssQUFLTSxBQUNYOzJCQVBNLEFBQ0QsQUFNSztBQU5MLEFBQ0w7MEJBRk07NEJBQUE7QUFBQTtTQUFBLEVBSk4sQUFJTTtzQkFKTjt3QkFBQSxBQWNDO0FBZEQ7S0FBQSxZQWNDLEFBQVUsSUFBSSxVQUFBLEFBQUMsR0FBRCxBQUFHLEdBQUksQUFDbEI7K0JBQ0ksQUFBQyxvQ0FBUyxNQUFWLEFBQWdCLEdBQUcsT0FBbkIsQUFBMEIsR0FBRyxLQUE3QixBQUFrQzswQkFBbEM7NEJBREosQUFDSSxBQUVIO0FBRkc7U0FBQTtBQXRCaEIsQUFDSSxBQUtJLEFBY0MsQUFVWjtBQUVEOztrQkFBQSxBQUFlIiwiZmlsZSI6IlVzZXJzRGF0YS5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMva2FzaC9Eb2N1bWVudHMvYXNzaWdubWVudC9uZXh0LWFwb2xsby1kZW1vL2NsaWVudCJ9
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvVXNlcnNEYXRhLmpzIl0sIm5hbWVzIjpbInVzZUVmZmVjdCIsInVzZVN0YXRlIiwiVXNlckNhcmQiLCJ1c2VMYXp5UXVlcnkiLCJ1c2VRdWVyeSIsInVzZXJMaXN0IiwiQm94IiwiQ2lyY3VsYXJQcm9ncmVzcyIsIkxpbmVhclByb2dyZXNzIiwiSW5maW5pdGVTY3JvbGwiLCJVc2Vyc0RhdGEiLCJnZXRkYXRhIiwiZXJyb3IiLCJsb2FkaW5nIiwiZGF0YSIsInN0YXRlRGF0YSIsInNldFN0YXRlRGF0YSIsImRpc0RhdGEiLCJzZXREaXNEYXRhIiwibG9hZGVyIiwic2V0bG9hZGVyIiwidGhlbiIsInJlcyIsIlVzZXIiLCJmZXRjaE1vcmVEYXRhIiwic2V0VGltZW91dCIsImNvbmNhdCIsImxlbmd0aCIsImRpc3BsYXkiLCJtYXJnaW5MZWZ0IiwibWFyZ2luVG9wIiwid2lkdGgiLCJoZWlnaHQiLCJiYWNrZ3JvdW5kQ29sb3IiLCJjb2xvciIsIm1hcCIsImUiLCJpIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUEsQUFBUyxBQUFXOzs7O0FBQ3BCLEFBQU8sQUFBYzs7OztBQUNyQixBQUFRLEFBQWM7O0FBQ3RCLEFBQVEsQUFBZTs7QUFDdkIsQUFBUzs7QUFDVCxBQUFVLEFBQWtCOztBQUM1QixBQUFPOzs7Ozs7Ozs7QUFHUCxTQUFBLEFBQVMsWUFBVzt3QkFBQSxBQUNzQixBQUFhO3FFQURuQztRQUFBLEFBQ1QseUJBRFM7eUNBQUE7UUFBQSxBQUNBLHdCQURBLEFBQ0E7UUFEQSxBQUNNLDBCQUROLEFBQ007UUFETixBQUNjLHVCQURkLEFBQ2M7O29CQURkLEFBRWdCOzZEQUZoQjtRQUFBLEFBRVQsdUJBRlM7UUFBQSxBQUVFLDBCQUZGOztxQkFHWSxxQkFIWixBQUdZLEFBQVM7OERBSHJCO1FBQUEsQUFHVCxxQkFIUztRQUFBLEFBR0Esd0JBSEE7O3FCQUlVLHFCQUpWLEFBSVUsQUFBUzs4REFKbkI7UUFBQSxBQUlULG9CQUpTO1FBQUEsQUFJRCx1QkFFZjs7MEJBQVUsWUFBSSxBQUNkO2tCQUFBLEFBQVUsS0FBSyxVQUFBLEFBQUMsS0FBTSxBQUFDO3lCQUFhLElBQUEsQUFBSSxLQUFqQixBQUFzQixBQUFNO0FBQW5ELEFBQ0M7QUFGRCxPQUFBLEFBRUUsQUFFRjs7UUFBTSxnQkFBYyxTQUFkLEFBQWMsZ0JBQUksQUFDeEI7WUFBRyxXQUFILEFBQVksZUFDUixBQUFVLEtBQUssVUFBQSxBQUFDLEtBQU0sQUFDdEI7dUJBQVcsWUFBTSxBQUNmOzZCQUFhLFVBQUEsQUFBVSxPQUFRLElBQUEsQUFBSSxLQUFuQyxBQUFhLEFBQTJCLEFBQ3hDOzBCQUFBLEFBQVUsQUFDVDtBQUhILGVBQUEsQUFHSyxBQUNSO0FBTEcsQUFPSixTQVBJOzttQkFPTyxVQUFYLEFBQW1CLEFBQ2xCO0FBVkQsQUFZQTs7MkJBQ0ksY0FBQTs7c0JBQUE7d0JBQUEsQUFFSztBQUZMO0FBQUEsS0FBQSxHQUVLLEFBQUMsNEJBQ0YsQUFBQzs7c0JBQUQ7d0JBREMsQUFDRDtBQUFBO0FBQUEsS0FBQSxvQkFFQSxBQUFDO29CQUNXLFVBQVUsQUFDdEI7QUFGQTtBQUNBLFVBRUEsU0FIQSxBQUdTLEFBQ1Q7eUNBRUksQUFBQyw2QkFBSSxJQUFJLEVBQUUsU0FBWCxBQUFTLEFBQVc7MEJBQXBCOzRCQUFBLEFBQ0E7QUFEQTtTQUFBLGtCQUNBLEFBQUMsNENBQWlCLE9BQU8sRUFBQyxZQUFELEFBQVksT0FBTyxXQUE1QyxBQUF5QixBQUE2QjswQkFBdEQ7NEJBRkEsQUFDQSxBQUNBO0FBQUE7V0FGQSxtQkFJRSxjQUFBO3FCQUNRLG1CQUFJLEFBQ1Y7MEJBQUEsQUFBVSxBQUNWO0FBQWdCO0FBSGxCLEFBSUY7O3VCQUFPLEFBQ0QsQUFDTjt3QkFGTyxBQUVBLEFBQ1A7aUNBSE8sQUFHUyxBQUNoQjt1QkFKTyxBQUlELEFBQ047NEJBTE8sQUFLSSxBQUNYOzJCQVZFLEFBSUssQUFNRztBQU5ILEFBQ1A7MEJBTEU7NEJBQUE7QUFBQTtBQUNELFNBREMsRUFUTixBQVNNO3NCQVROO3dCQUFBLEFBc0JDO0FBdEJEO0tBQUEsWUFzQkMsQUFBVSxJQUFJLFVBQUEsQUFBQyxHQUFELEFBQUcsR0FBSSxBQUNsQjsrQkFDSSxBQUFDLG9DQUFTLE1BQVYsQUFBZ0IsR0FBRyxPQUFuQixBQUEwQixHQUFHLEtBQTdCLEFBQWtDOzBCQUFsQzs0QkFESixBQUNJLEFBRUg7QUFGRztTQUFBO0FBOUJoQixBQUNJLEFBS0ksQUFzQkMsQUFVWjtBQUVEOztrQkFBQSxBQUFlIiwiZmlsZSI6IlVzZXJzRGF0YS5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMva2FzaC9Eb2N1bWVudHMvYXNzaWdubWVudC9uZXh0LWFwb2xsby1kZW1vL2NsaWVudCJ9

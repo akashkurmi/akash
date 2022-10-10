@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import WithApollo from '../lib/with-apollo'
-import Name from '../components/Name'
+// import WithApollo from '../lib/with-apollo'
+// import Name from '../components/Name'
 import { Container } from '@mui/material'
 
 const Page = () => (

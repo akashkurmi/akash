@@ -1,15 +1,11 @@
 import Link from 'next/link'
 import UsersData from '../components/UsersData'
-import { InMemoryCache, ApolloProvider,ApolloClient, gql } from '@apollo/client';
 import { Container } from '@mui/system';
 import Navbar from '../components/navbar';
-// import { ApolloClient } from 'apollo-client';
 
-// import Alert from 'react-bootstrap/Alert';
-const client = new ApolloClient({
-  uri: 'http://localhost:4047/graphql',
-  cache: new InMemoryCache(),
-});
+import {  ApolloProvider } from '@apollo/client';
+import {client} from '../lib/apollo-client'
+
 export default () => (
 
   <div >
