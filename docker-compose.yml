@@ -1,6 +1,16 @@
 version: ''
 services: 
-  node-server:
+   api: 
+      build: 
+         context: ./client
+      ports:
+         - "3000:3000"
+      expose:
+      - 3000
+      container_name: client
+      volumes:
+         - .:/client
+   node-server:
       build:
          context: ./server
       ports:

@@ -14,7 +14,8 @@ function UsersData(){
     const [loader, setloader]=useState(false);
     
     useEffect(()=>{
-    getdata().then((res)=>{setStateData(res.data.User)});
+    getdata().then((res)=>{setStateData(res.data.User)}).catch(()=>{console.log(res)});
+    console.log(error);
     },[])
    
     const fetchMoreData=()=>{
